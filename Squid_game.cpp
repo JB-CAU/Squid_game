@@ -37,10 +37,15 @@ auto stage1_main = Sound::create("music/무궁화꽃이피었습니다.mp3");
 auto playerX = 610;
 auto playerY = 80;
 
-auto trapX = 100;
-auto trapY = 200;
+auto trap1X = 100;
+auto trap1Y = 200;
 
-auto trap = Object::create("Images/장애물.png", stage1_gameboard, trapX, trapY);
+auto trap2X = 100;
+auto trap2Y = 400;
+
+// 적당한 장애물 이미지 다시 찾아보기
+auto trap1 = Object::create("Images/장애물.png", stage1_gameboard, trap1X, trap1Y);
+auto trap2 = Object::create("Images/장애물2.png", stage1_gameboard, trap2X, trap2Y);
 
 auto player = Object::create("Images/플레이어.png", stage1_gameboard, playerX, playerY);
 auto clear_button = Object::create("Images/통과.png", stage1_gameboard, 390, 110, false);
@@ -50,7 +55,6 @@ auto gunshot = Sound::create("music/총소리.mp3");
 int eye_sceneCount = 1;
 int intro_sceneCount = 1;
 int stage1_sceneCount = 1;
-int trap_Count = 1;
 
 void game_over()
 {
@@ -73,9 +77,10 @@ void init_game()
 	eye_sceneCount = 1;
 	intro_sceneCount = 1;
 	stage1_sceneCount = 1;
-	trap_Count = 1;
-	trapX = 100;
-	trapY = 200;
+	trap1X = 100;
+	trap1Y = 200;
+	trap2X = 100;
+	trap2Y = 400;
 	playerX = 610;
 	playerY = 80;
 	player->locate(stage1_gameboard, playerX, playerY);
@@ -105,7 +110,12 @@ void game_clear()
 
 bool check_touch() // 함정에 닿았는지
 {
-	if ((playerX <= trapX + 154 && playerX >= trapX - 61) && (playerY <= trapY + 61 && playerY >= trapY - 61 ))
+	if ((playerX <= trap1X + 154 && playerX >= trap1X - 61) && (playerY <= trap1Y + 61 && playerY >= trap1Y - 61 ))
+	{
+		game_over();
+		return true;
+	}
+	else if ((playerX <= trap2X + 154 && playerX >= trap2X - 61) && (playerY <= trap2Y + 61 && playerY >= trap2Y - 61))
 	{
 		game_over();
 		return true;
@@ -207,7 +217,7 @@ int main()
 		return 0;
 		});
 
-	auto gameRule_next_button = Object::create("Images/다음페이지.png", stage1_lobby, 1180, 30); // false로
+	auto gameRule_next_button = Object::create("Images/다음페이지.png", stage1_lobby, 1180, 30, false);
 	gameRule_next_button->setScale(0.6f);
 	gameRule_next_button->setOnMouseCallback([&](ObjectPtr object, int x, int y, MouseAction action)-> bool {
 
@@ -321,7 +331,6 @@ int main()
 				return 0;
 		});
 
-
 	stage1_scene_timer = Timer::create(animationTime);
 	stage1_scene_timer->setOnTimerCallback([&](auto)->bool
 		{
@@ -336,15 +345,16 @@ int main()
 			else gameRule_next_button->show();
 			return 0;
 		});
-
+	
 	stage1_game_timer = Timer::create(game_time_limit);
 
 	stage1_trap_timer = Timer::create(animationTime);
 	stage1_trap_timer->setOnTimerCallback([&](auto)->bool
 		{
-			trapX += 3;
-			trap->locate(stage1_gameboard, trapX, trapY);
-			trap_Count++;
+			trap1X += 7;
+			trap2X += 3;
+			trap1->locate(stage1_gameboard, trap1X, trap1Y);
+			trap2->locate(stage1_gameboard, trap2X, trap2Y);
 			if (!check_touch())
 			{
 				stage1_trap_timer->set(animationTime);
@@ -353,7 +363,9 @@ int main()
 			return 0;
 		});
 
-	// BGM_main->play();
+
+
+	BGM_main->play();
 
 	game_start_button->setScale(0.4f);
 	game_start_button->setOnMouseCallback([&](ObjectPtr object, int x, int y, MouseAction action)-> bool {
@@ -363,5 +375,5 @@ int main()
 		return 0;
 		});
 
-	startGame(decide_to_join);
+	startGame(main_scene);
 }
