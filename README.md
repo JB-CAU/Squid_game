@@ -1,12 +1,9 @@
 
-
-
 <div align="center">
 원활한 플레이를 위해서 사운드를 조정해주세요. ( ** 소리가 제법 큽니다 ** )<br/>
 도중에 애니메이션이 있으니, 끊김 현상이 발생한다면 종료 후 다시 실행해주세요.<br/>
 감사합니다.<br/>
-</div>
-    
+
 <br/><br/>
       
 ![환영멘트](https://user-images.githubusercontent.com/90530763/137575842-bb988e1d-1f3e-470e-b175-e0e922deed37.png)
