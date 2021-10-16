@@ -7,7 +7,7 @@
 감사합니다.<br/>
 </div>
     
-<br/><br/><br/>
+<br/><br/>
       
 ![환영멘트](https://user-images.githubusercontent.com/90530763/137575842-bb988e1d-1f3e-470e-b175-e0e922deed37.png)
 <br/><br/>
@@ -16,7 +16,7 @@
 <br/><br/>
 ![게임 소개](https://user-images.githubusercontent.com/90530763/137575824-96123348-4eb4-4313-8150-c506eb3914da.png)
 
-## 여러분들께 기회를 드리고자 합니다.
+### 여러분들께 기회를 드리고자 합니다.
 ### 룰은 아주 간단합니다. 
 ## 게임 하나를 플레이해서 통과하신 분들께는 과제 기한을 연장해드리겠습니다.
 <br/>
